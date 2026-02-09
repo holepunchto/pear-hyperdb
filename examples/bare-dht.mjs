@@ -1,10 +1,9 @@
-import Corestore from 'corestore'
 import Model from '../index.js'
+import HyperDB from 'hyperdb'
+import dbSpec from '../spec/db/index.js'
 
-const corestore = new Corestore('./my-storage')
-await corestore.ready()
-
-const model = new Model(corestore)
+const rocks = HyperDB.rocks('./my-rocks.db', dbSpec)
+const model = new Model(rocks)
 await model.db.ready()
 
 await model.setDhtNodes([{ host: 'holepunch.to', port: 8080 }])

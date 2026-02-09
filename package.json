@@ -23,7 +23,6 @@
   "devDependencies": {
     "bare-path": "^3.0.0",
     "brittle": "^3.19.1",
-    "corestore": "^7.8.0",
     "lunte": "^1.6.0",
     "prettier": "^3.8.1",
     "prettier-config-holepunch": "^2.0.0",

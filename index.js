@@ -1,12 +1,10 @@
 'use strict'
 const b4a = require('b4a')
 const fs = require('bare-fs')
-const HyperDB = require('hyperdb')
 const DBLock = require('db-lock')
 const LocalDrive = require('localdrive')
 const plink = require('pear-link')
 const { ERR_INVALID_LINK } = require('pear-errors')
-const dbSpec = require('./spec/db')
 
 if (global.LOG === undefined) global.LOG = { trace() {} }
 const LOG = global.LOG
@@ -55,8 +53,8 @@ class Lock extends DBLock {
 }
 
 module.exports = class Model {
-  constructor(corestore) {
-    this.db = HyperDB.rocks(corestore.storage.rocks.session(), dbSpec)
+  constructor(rocks) {
+    this.db = rocks
     this.lock = new Lock(this.db)
   }
 

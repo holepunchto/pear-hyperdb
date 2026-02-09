@@ -12,15 +12,20 @@ npm install pear-hyperdb
 
 ```js
 const Model = require('pear-hyperdb')
-const Corestore = require('corestore')
+const HyperDB = require('hyperdb')
+const dbSpec = require('pear-hyperdb/spec/db')
 ```
 
 ```js
-const corestore = new Corestore('./my-storage')
-const model = new Model(corestore)
+const rocks = HyperDB.rocks('./my-rocks.db', dbSpec)
+const model = new Model(rocks)
+await model.db.ready()
+
 await model.setDhtNodes([{ host: 'holepunch.to', port: 8080 }])
 const nodes = await model.getDhtNodes()
 console.log(nodes)
+
+await model.close()
 ```
 
 ### HyperDB Spec

@@ -2,14 +2,19 @@
 const test = require('brittle')
 const tmp = require('test-tmp')
 const path = require('bare-path')
-const Corestore = require('corestore')
+const HyperDB = require('hyperdb')
+const dbSpec = require('../spec/db')
 const Model = require('..')
+
+function createModel(dbPath) {
+  const rocks = HyperDB.rocks(dbPath, dbSpec)
+  return new Model(rocks)
+}
 
 test('DHT', async function (t) {
   const dir = await tmp()
-  const store = new Corestore(dir)
-  await store.ready()
-  let model = new Model(store)
+  const dbPath = path.join(dir, 'rocks.db')
+  let model = createModel(dbPath)
   await model.db.ready()
   const nodes = [
     { host: '127.0.0.1', port: 1234 },
@@ -17,33 +22,31 @@ test('DHT', async function (t) {
   ]
   await model.setDhtNodes(nodes)
   t.alike(await model.getDhtNodes(), nodes)
-  await model.db.close()
+  await model.close()
 
   // Reopen to verify data persistence
-  model = new Model(store)
+  model = createModel(dbPath)
   await model.db.ready()
   t.alike(await model.getDhtNodes(), nodes)
-  await model.db.close()
+  await model.close()
 })
 
 test('Manifest', async function (t) {
   const dir = await tmp()
-  const store = new Corestore(dir)
-  await store.ready()
-  const model = new Model(store)
+  const dbPath = path.join(dir, 'rocks.db')
+  const model = createModel(dbPath)
   await model.db.ready()
 
   await model.setManifest(1)
   t.alike(await model.getManifest(), { version: 1 })
 
-  await model.db.close()
+  await model.close()
 })
 
 test('Traits', async function (t) {
   const dir = await tmp()
-  const store = new Corestore(dir)
-  await store.ready()
-  const model = new Model(store)
+  const dbPath = path.join(dir, 'rocks.db')
+  const model = createModel(dbPath)
   await model.db.ready()
 
   const link = 'pear://runtime'
@@ -52,14 +55,13 @@ test('Traits', async function (t) {
   await model.addTraits(link, appStorage)
   t.is(await model.getAppStorage(link), appStorage)
 
-  await model.db.close()
+  await model.close()
 })
 
 test('Currents', async function (t) {
   const dir = await tmp()
-  const store = new Corestore(dir)
-  await store.ready()
-  const model = new Model(store)
+  const dbPath = path.join(dir, 'rocks.db')
+  const model = createModel(dbPath)
   await model.db.ready()
 
   const link = 'pear://runtime'
@@ -69,14 +71,13 @@ test('Currents', async function (t) {
   t.is(current.checkout.fork, 1)
   t.is(current.checkout.length, 0)
 
-  await model.db.close()
+  await model.close()
 })
 
 test('Assets', async function (t) {
   const dir = await tmp()
-  const store = new Corestore(dir)
-  await store.ready()
-  const model = new Model(store)
+  const dbPath = path.join(dir, 'rocks.db')
+  const model = createModel(dbPath)
   await model.db.ready()
 
   const link = 'pear://0.1.runtime'
@@ -92,14 +93,13 @@ test('Assets', async function (t) {
   t.is(asset.ns, 'ui')
   t.is(asset.name, 'main')
 
-  await model.db.close()
+  await model.close()
 })
 
 test('GC', async function (t) {
   const dir = await tmp()
-  const store = new Corestore(dir)
-  await store.ready()
-  const model = new Model(store)
+  const dbPath = path.join(dir, 'rocks.db')
+  const model = createModel(dbPath)
   await model.db.ready()
 
   const link = 'pear://runtime'
@@ -111,5 +111,5 @@ test('GC', async function (t) {
   t.is(gc.length, 1)
   t.is(gc[0].path, oldStorage)
 
-  await model.db.close()
+  await model.close()
 })
