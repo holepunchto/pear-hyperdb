@@ -19,7 +19,7 @@ test('DHT', async function (t) {
   t.alike(await model.getDhtNodes(), nodes)
   await model.db.close()
 
-  // Reopen to check if data are persisted
+  // Reopen to verify data persistence
   model = new Model(store)
   await model.db.ready()
   t.alike(await model.getDhtNodes(), nodes)
