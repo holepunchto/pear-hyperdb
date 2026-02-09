@@ -1,6 +1,6 @@
 # pear-hyperdb
 
-[HyperDB](https://github.com/holepunchto/hyperdb) spec and model for [Pear](https://github.com/holepunchto/pear)
+[HyperDB](https://github.com/holepunchto/hyperdb) model for [Pear](https://github.com/holepunchto/pear)
 
 ```
 npm install pear-hyperdb
@@ -12,15 +12,18 @@ npm install pear-hyperdb
 
 ```js
 const Model = require('pear-hyperdb')
+const Corestore = require('corestore')
 ```
 
 ```js
+const corestore = new Corestore('./my-storage')
 const model = new Model(corestore)
+await model.setDhtNodes([{ host: 'holepunch.to', port: 8080 }])
 const nodes = await model.getDhtNodes()
 console.log(nodes)
 ```
 
-### Spec
+### HyperDB Spec
 
 ```js
 const dbSpec = require('pear-hyperdb/spec/db')
@@ -28,7 +31,7 @@ const dbSpec = require('pear-hyperdb/spec/db')
 
 ### Adding new fields
 
-[Hyperschema](https://github.com/holepunchto/hyperschema) definition at `build.js`.
+Expand the [Hyperschema](https://github.com/holepunchto/hyperschema) definition at `build.js`.
 
 ```bash
 npm run build

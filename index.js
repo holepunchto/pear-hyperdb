@@ -1,5 +1,4 @@
 'use strict'
-/* global LOG */
 const b4a = require('b4a')
 const fs = require('bare-fs')
 const HyperDB = require('hyperdb')
@@ -8,6 +7,9 @@ const LocalDrive = require('localdrive')
 const plink = require('pear-link')
 const { ERR_INVALID_LINK } = require('pear-errors')
 const dbSpec = require('./spec/db')
+
+if (global.LOG === undefined) global.LOG = { trace: console.log }
+const LOG = global.LOG
 
 const applink = (link, { alias = true } = {}) => {
   const parsed = typeof link === 'string' ? plink.parse(link) : { ...link }
@@ -280,7 +282,7 @@ module.exports = class Model {
     await tx.insert('@pear/gc', gc)
 
     const srcUpdate = { ...srcBundle, appStorage: newSrcAppStorage }
-    LOG.trace('db', 'INSERT', '@pear/gc', srcUpdate)
+    LOG.trace('db', 'INSERT', '@pear/traits', srcUpdate)
     await tx.insert('@pear/traits', srcUpdate)
 
     await this.lock.exit()
