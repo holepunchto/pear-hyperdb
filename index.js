@@ -8,7 +8,7 @@ const plink = require('pear-link')
 const { ERR_INVALID_LINK } = require('pear-errors')
 const dbSpec = require('./spec/db')
 
-if (global.LOG === undefined) global.LOG = { trace: console.log }
+if (global.LOG === undefined) global.LOG = { trace() {} }
 const LOG = global.LOG
 
 const applink = (link, { alias = true } = {}) => {
