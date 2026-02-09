@@ -1,0 +1,29 @@
+{
+  "name": "pear-hyperdb",
+  "version": "0.0.0",
+  "description": "HyperDB spec and model for Pear",
+  "author": "Holepunch",
+  "main": "index.js",
+  "dependencies": {
+    "b4a": "^1.7.3",
+    "bare-fs": "^4.5.3",
+    "bare-path": "^3.0.0",
+    "db-lock": "^1.2.0",
+    "hyperdb": "^5.0.1",
+    "hyperschema": "^1.19.0",
+    "localdrive": "^2.2.0",
+    "pear-errors": "^1.0.1",
+    "pear-link": "^4.2.1"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "prettier --check . && lunte",
+    "build": "bare build.js"
+  },
+  "devDependencies": {
+    "brittle": "^3.19.1",
+    "lunte": "^1.6.0",
+    "prettier": "^3.8.1",
+    "prettier-config-holepunch": "^2.0.0"
+  }
+}
