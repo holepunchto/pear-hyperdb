@@ -1,10 +1,8 @@
 'use strict'
-
 const test = require('brittle')
 const tmp = require('test-tmp')
-const Corestore = require('corestore')
 const path = require('bare-path')
-
+const Corestore = require('corestore')
 const Model = require('..')
 
 test('DHT', async function (t) {
@@ -21,7 +19,7 @@ test('DHT', async function (t) {
   t.alike(await model.getDhtNodes(), nodes)
   await model.db.close()
 
-  // Test persistence after close
+  // Reopen to check if data are persisted
   model = new Model(store)
   await model.db.ready()
   t.alike(await model.getDhtNodes(), nodes)
@@ -65,7 +63,6 @@ test('Currents', async function (t) {
   await model.db.ready()
 
   const link = 'pear://runtime'
-
   await model.setCurrent(link, { fork: 1, length: 2 })
   const current = await model.getCurrent(link)
 
@@ -83,7 +80,6 @@ test('Assets', async function (t) {
   await model.db.ready()
 
   const link = 'pear://0.1.runtime'
-
   await model.addAsset(link, {
     ns: 'ui',
     name: 'main',
@@ -107,7 +103,6 @@ test('GC', async function (t) {
   await model.db.ready()
 
   const link = 'pear://runtime'
-
   await model.addTraits(link, path.join(dir, 'app'))
   const oldStorage = path.join(dir, 'old')
   await model.updateAppStorage(link, path.join(dir, 'new'), oldStorage)
