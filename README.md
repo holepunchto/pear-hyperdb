@@ -31,7 +31,7 @@ const dbSpec = require('pear-hyperdb/spec/db')
 
 ### Adding new fields
 
-Expand the [Hyperschema](https://github.com/holepunchto/hyperschema) definition at `build.js`.
+Expand the [Hyperschema](https://github.com/holepunchto/hyperschema) definition at [`build.js`](./build.js).
 
 ```bash
 npm run build

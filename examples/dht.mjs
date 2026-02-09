@@ -7,7 +7,7 @@ await corestore.ready()
 const model = new Model(corestore)
 await model.db.ready()
 
-// await model.setDhtNodes([{ host: 'holepunch.to', port: 8080 }])
+await model.setDhtNodes([{ host: 'holepunch.to', port: 8080 }])
 const nodes = await model.getDhtNodes()
 console.log(nodes)
 
