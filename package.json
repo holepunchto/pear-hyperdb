@@ -1,6 +1,6 @@
 {
   "name": "pear-hyperdb",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "HyperDB model for Pear",
   "author": "Holepunch",
   "main": "index.js",
