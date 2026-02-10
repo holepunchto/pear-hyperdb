@@ -25,7 +25,7 @@ console.log(nodes)
 await model.close()
 ```
 
-## Modifyng the schema
+## Modifying the schema
 
 Edit the [Hyperschema](https://github.com/holepunchto/hyperschema) definition at [`build.js`](./build.js), then run:
 
