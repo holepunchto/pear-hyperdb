@@ -1,6 +1,6 @@
 'use strict'
 const b4a = require('b4a')
-const fs = require('bare-fs')
+const fs = require('fs')
 const DBLock = require('db-lock')
 const LocalDrive = require('localdrive')
 const plink = require('pear-link')

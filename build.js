@@ -4,7 +4,7 @@
 2. Deleting/resetting files in `./spec` directory is forbidden
 3. After making changes: `npm run build`. Once merged into the main branch, there is no undoing.
 */
-const path = require('bare-path')
+const path = require('path')
 const Hyperschema = require('hyperschema')
 const Builder = require('hyperdb/builder')
 

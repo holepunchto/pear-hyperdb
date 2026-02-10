@@ -7,6 +7,7 @@
   "dependencies": {
     "b4a": "^1.7.3",
     "bare-fs": "^4.5.3",
+    "bare-path": "^3.0.0",
     "db-lock": "^1.2.0",
     "hyperdb": "^5.0.1",
     "hyperschema": "^1.19.0",
@@ -14,14 +15,23 @@
     "pear-errors": "^1.0.1",
     "pear-link": "^4.2.1"
   },
+  "imports": {
+    "fs": {
+      "bare": "bare-fs",
+      "default": "fs"
+    },
+    "path": {
+      "bare": "bare-path",
+      "default": "path"
+    }
+  },
   "scripts": {
     "format": "prettier --write .",
     "lint": "prettier --check . && lunte",
-    "build": "bare build.js",
+    "build": "node build.js",
     "test": "brittle-bare test/all.js"
   },
   "devDependencies": {
-    "bare-path": "^3.0.0",
     "brittle": "^3.19.1",
     "lunte": "^1.6.0",
     "prettier": "^3.8.1",

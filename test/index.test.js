@@ -1,7 +1,7 @@
 'use strict'
 const test = require('brittle')
 const tmp = require('test-tmp')
-const path = require('bare-path')
+const path = require('path')
 const HyperDB = require('hyperdb')
 const { spec, Model } = require('..')
 
