@@ -1,8 +1,8 @@
 import HyperDB from 'hyperdb'
-import pkg from '../index.js'
+import { spec, Model } from '../index.js'
 
-const rocks = HyperDB.rocks('./my-rocks.db', pkg.spec)
-const model = new pkg.Model(rocks)
+const rocks = HyperDB.rocks('./my-rocks.db', spec)
+const model = new Model(rocks)
 await model.db.ready()
 
 await model.setDhtNodes([{ host: 'holepunch.to', port: 8080 }])

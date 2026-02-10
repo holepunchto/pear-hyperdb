@@ -374,7 +374,5 @@ class Model {
   }
 }
 
-module.exports = {
-  spec: require('./spec/db'),
-  Model
-}
+exports.spec = require('./spec/db')
+exports.Model = Model
