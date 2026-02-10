@@ -52,7 +52,7 @@ class Lock extends DBLock {
   }
 }
 
-module.exports = class Model {
+class Model {
   constructor(rocks) {
     this.db = rocks
     this.lock = new Lock(this.db)
@@ -372,4 +372,9 @@ module.exports = class Model {
     LOG.trace('db', 'CLOSE')
     await this.db.close()
   }
+}
+
+module.exports = {
+  spec: require('./spec/db'),
+  Model
 }

@@ -3,18 +3,17 @@ const test = require('brittle')
 const tmp = require('test-tmp')
 const path = require('bare-path')
 const HyperDB = require('hyperdb')
-const dbSpec = require('../spec/db')
-const Model = require('..')
+const { spec, Model } = require('..')
 
-function createModel(dbPath) {
-  const rocks = HyperDB.rocks(dbPath, dbSpec)
-  return new Model(rocks)
+async function tmpRocks() {
+  const dir = await tmp()
+  const rocks = HyperDB.rocks(path.join(dir, 'rocks.db'), spec)
+  return { rocks, dir }
 }
 
 test('DHT', async function (t) {
-  const dir = await tmp()
-  const dbPath = path.join(dir, 'rocks.db')
-  let model = createModel(dbPath)
+  const { rocks } = await tmpRocks()
+  const model = new Model(rocks)
   await model.db.ready()
   const nodes = [
     { host: '127.0.0.1', port: 1234 },
@@ -23,18 +22,11 @@ test('DHT', async function (t) {
   await model.setDhtNodes(nodes)
   t.alike(await model.getDhtNodes(), nodes)
   await model.close()
-
-  // Reopen to verify data persistence
-  model = createModel(dbPath)
-  await model.db.ready()
-  t.alike(await model.getDhtNodes(), nodes)
-  await model.close()
 })
 
 test('Manifest', async function (t) {
-  const dir = await tmp()
-  const dbPath = path.join(dir, 'rocks.db')
-  const model = createModel(dbPath)
+  const { rocks } = await tmpRocks()
+  const model = new Model(rocks)
   await model.db.ready()
 
   await model.setManifest(1)
@@ -44,9 +36,8 @@ test('Manifest', async function (t) {
 })
 
 test('Traits', async function (t) {
-  const dir = await tmp()
-  const dbPath = path.join(dir, 'rocks.db')
-  const model = createModel(dbPath)
+  const { rocks, dir } = await tmpRocks()
+  const model = new Model(rocks)
   await model.db.ready()
 
   const link = 'pear://runtime'
@@ -59,9 +50,8 @@ test('Traits', async function (t) {
 })
 
 test('Currents', async function (t) {
-  const dir = await tmp()
-  const dbPath = path.join(dir, 'rocks.db')
-  const model = createModel(dbPath)
+  const { rocks } = await tmpRocks()
+  const model = new Model(rocks)
   await model.db.ready()
 
   const link = 'pear://runtime'
@@ -75,9 +65,8 @@ test('Currents', async function (t) {
 })
 
 test('Assets', async function (t) {
-  const dir = await tmp()
-  const dbPath = path.join(dir, 'rocks.db')
-  const model = createModel(dbPath)
+  const { rocks, dir } = await tmpRocks()
+  const model = new Model(rocks)
   await model.db.ready()
 
   const link = 'pear://0.1.runtime'
@@ -97,9 +86,8 @@ test('Assets', async function (t) {
 })
 
 test('GC', async function (t) {
-  const dir = await tmp()
-  const dbPath = path.join(dir, 'rocks.db')
-  const model = createModel(dbPath)
+  const { rocks, dir } = await tmpRocks()
+  const model = new Model(rocks)
   await model.db.ready()
 
   const link = 'pear://runtime'

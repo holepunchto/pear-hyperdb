@@ -8,16 +8,13 @@ npm install pear-hyperdb
 
 ## Usage
 
-### Model
-
 ```js
-const Model = require('pear-hyperdb')
+const { spec, Model } = require('pear-hyperdb')
 const HyperDB = require('hyperdb')
-const dbSpec = require('pear-hyperdb/spec/db')
 ```
 
 ```js
-const rocks = HyperDB.rocks('./my-rocks.db', dbSpec)
+const rocks = HyperDB.rocks('./my-rocks.db', spec)
 const model = new Model(rocks)
 await model.db.ready()
 
@@ -28,15 +25,9 @@ console.log(nodes)
 await model.close()
 ```
 
-### HyperDB Spec
+## Modifyng the schema
 
-```js
-const dbSpec = require('pear-hyperdb/spec/db')
-```
-
-### Adding new fields
-
-Expand the [Hyperschema](https://github.com/holepunchto/hyperschema) definition at [`build.js`](./build.js).
+Edit the [Hyperschema](https://github.com/holepunchto/hyperschema) definition at [`build.js`](./build.js), then run:
 
 ```bash
 npm run build
