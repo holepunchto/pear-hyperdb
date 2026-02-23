@@ -1,5 +1,6 @@
 'use strict'
 const test = require('brittle')
+const crypto = require('hypercore-crypto')
 const tmp = require('test-tmp')
 const path = require('path')
 const HyperDB = require('hyperdb')
@@ -45,6 +46,24 @@ test('Traits', async function (t) {
 
   await model.addTraits(link, appStorage)
   t.is(await model.getAppStorage(link), appStorage)
+
+  await model.close()
+})
+
+test('Traits entropy', async function (t) {
+  const { rocks, dir } = await tmpRocks()
+  const model = new Model(rocks)
+  await model.db.ready()
+
+  const link = 'pear://runtime'
+  const appStorage = path.join(dir, 'app')
+  const entropy = crypto.randomBytes(16).toString('hex')
+
+  await model.addTraits(link, appStorage)
+  await model.updateEntropy(link, entropy)
+  const traits = await model.getTraits(link)
+
+  t.is(traits.entropy, entropy)
 
   await model.close()
 })
