@@ -189,6 +189,10 @@ pearSchema.register({
       name: 'tags',
       type: 'string',
       array: true
+    },
+    {
+      name: 'entropy',
+      type: 'hex'
     }
   ]
 })

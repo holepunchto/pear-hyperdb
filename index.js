@@ -97,6 +97,24 @@ class Model {
     return result
   }
 
+  async updateEntropy(link, entropy) {
+    let result
+    const tx = await this.lock.enter()
+    const get = { link: applink(link) }
+    LOG.trace('db', 'GET', '@pear/traits', get)
+    const traits = await tx.get('@pear/traits', get)
+    if (!traits) {
+      result = null
+    } else {
+      const update = { ...traits, entropy }
+      LOG.trace('db', 'INSERT', '@pear/traits', update)
+      await tx.insert('@pear/traits', update)
+      result = update
+    }
+    await this.lock.exit()
+    return result
+  }
+
   async updateAppStorage(link, newAppStorage, oldStorage) {
     let result
     const tx = await this.lock.enter()
