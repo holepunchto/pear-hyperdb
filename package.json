@@ -1,6 +1,6 @@
 {
   "name": "pear-hyperdb",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "HyperDB model for Pear",
   "author": "Holepunch",
   "main": "index.js",
@@ -33,7 +33,6 @@
   },
   "devDependencies": {
     "brittle": "^3.19.1",
-    "hypercore-crypto": "^3.6.1",
     "lunte": "^1.6.0",
     "prettier": "^3.8.1",
     "prettier-config-holepunch": "^2.0.0",
