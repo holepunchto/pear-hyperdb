@@ -83,14 +83,13 @@ const encoding3 = {
   preencode(state, m) {
     c.string.preencode(state, m.link)
     c.string.preencode(state, m.appStorage)
-    state.end++ // max flag is 4 so always one byte
+    state.end++ // max flag is 2 so always one byte
 
     if (m.encryptionKey) c.fixed32.preencode(state, m.encryptionKey)
     if (m.tags) encoding3_3.preencode(state, m.tags)
-    if (m.entropy) c.hex.preencode(state, m.entropy)
   },
   encode(state, m) {
-    const flags = (m.encryptionKey ? 1 : 0) | (m.tags ? 2 : 0) | (m.entropy ? 4 : 0)
+    const flags = (m.encryptionKey ? 1 : 0) | (m.tags ? 2 : 0)
 
     c.string.encode(state, m.link)
     c.string.encode(state, m.appStorage)
@@ -98,7 +97,6 @@ const encoding3 = {
 
     if (m.encryptionKey) c.fixed32.encode(state, m.encryptionKey)
     if (m.tags) encoding3_3.encode(state, m.tags)
-    if (m.entropy) c.hex.encode(state, m.entropy)
   },
   decode(state) {
     const r0 = c.string.decode(state)
@@ -109,8 +107,7 @@ const encoding3 = {
       link: r0,
       appStorage: r1,
       encryptionKey: (flags & 1) !== 0 ? c.fixed32.decode(state) : null,
-      tags: (flags & 2) !== 0 ? encoding3_3.decode(state) : null,
-      entropy: (flags & 4) !== 0 ? c.hex.decode(state) : null
+      tags: (flags & 2) !== 0 ? encoding3_3.decode(state) : null
     }
   }
 }
@@ -320,21 +317,19 @@ const encoding11_3 = encoding3_3
 const encoding11 = {
   preencode(state, m) {
     c.string.preencode(state, m.appStorage)
-    state.end++ // max flag is 4 so always one byte
+    state.end++ // max flag is 2 so always one byte
 
     if (m.encryptionKey) c.fixed32.preencode(state, m.encryptionKey)
     if (m.tags) encoding11_3.preencode(state, m.tags)
-    if (m.entropy) c.hex.preencode(state, m.entropy)
   },
   encode(state, m) {
-    const flags = (m.encryptionKey ? 1 : 0) | (m.tags ? 2 : 0) | (m.entropy ? 4 : 0)
+    const flags = (m.encryptionKey ? 1 : 0) | (m.tags ? 2 : 0)
 
     c.string.encode(state, m.appStorage)
     c.uint.encode(state, flags)
 
     if (m.encryptionKey) c.fixed32.encode(state, m.encryptionKey)
     if (m.tags) encoding11_3.encode(state, m.tags)
-    if (m.entropy) c.hex.encode(state, m.entropy)
   },
   decode(state) {
     const r1 = c.string.decode(state)
@@ -344,8 +339,7 @@ const encoding11 = {
       link: null,
       appStorage: r1,
       encryptionKey: (flags & 1) !== 0 ? c.fixed32.decode(state) : null,
-      tags: (flags & 2) !== 0 ? encoding11_3.decode(state) : null,
-      entropy: (flags & 4) !== 0 ? c.hex.decode(state) : null
+      tags: (flags & 2) !== 0 ? encoding11_3.decode(state) : null
     }
   }
 }
