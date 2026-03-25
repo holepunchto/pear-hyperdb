@@ -1,15 +1,15 @@
-# pear-hyperdb-next
+# pear-hyperdb
 
 [HyperDB](https://github.com/holepunchto/hyperdb) model for [Pear](https://github.com/holepunchto/pear)
 
 ```
-npm install pear-hyperdb-next
+npm install pear-hyperdb
 ```
 
 ## Usage
 
 ```js
-const { spec, Model } = require('pear-hyperdb-next')
+const { spec, Model } = require('pear-hyperdb')
 const HyperDB = require('hyperdb')
 ```
 
