@@ -1,7 +1,7 @@
 {
   "name": "pear-hyperdb",
-  "version": "0.0.0",
-  "description": "DHT-only HyperDB model for Pear",
+  "version": "1.0.0",
+  "description": "HyperDB model for Pear",
   "author": "Holepunch",
   "main": "index.js",
   "dependencies": {
