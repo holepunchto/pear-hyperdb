@@ -1,19 +1,15 @@
 {
-  "name": "pear-hyperdb",
-  "version": "1.0.0",
-  "description": "HyperDB model for Pear",
+  "name": "pear-hyperdb-next",
+  "version": "0.0.0",
+  "description": "DHT-only HyperDB model for Pear",
   "author": "Holepunch",
   "main": "index.js",
   "dependencies": {
-    "b4a": "^1.7.3",
     "bare-fs": "^4.5.3",
     "bare-path": "^3.0.0",
     "db-lock": "^1.2.0",
     "hyperdb": "^5.0.1",
-    "hyperschema": "^1.19.0",
-    "localdrive": "^2.2.0",
-    "pear-errors": "^1.0.1",
-    "pear-link": "^4.2.1"
+    "hyperschema": "^1.19.0"
   },
   "imports": {
     "fs": {
@@ -28,7 +24,7 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "prettier --check . && lunte",
-    "build": "node build.js",
+    "build": "node builder.js",
     "test": "brittle-bare test/all.js"
   },
   "devDependencies": {

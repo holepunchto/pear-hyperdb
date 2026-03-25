@@ -1,15 +1,15 @@
-# pear-hyperdb
+# pear-hyperdb-next
 
 [HyperDB](https://github.com/holepunchto/hyperdb) model for [Pear](https://github.com/holepunchto/pear)
 
 ```
-npm install pear-hyperdb
+npm install pear-hyperdb-next
 ```
 
 ## Usage
 
 ```js
-const { spec, Model } = require('pear-hyperdb')
+const { spec, Model } = require('pear-hyperdb-next')
 const HyperDB = require('hyperdb')
 ```
 
@@ -18,20 +18,27 @@ const rocks = HyperDB.rocks('./my-rocks.db', spec)
 const model = new Model(rocks)
 await model.db.ready()
 
-await model.setDhtNodes([{ host: 'holepunch.to', port: 8080 }])
-const nodes = await model.getDhtNodes()
-console.log(nodes)
+await model.setDhtNodes([...(await model.getDhtNodes()), { host: 'holepunch.to', port: 8080 }])
+console.log(await model.getDhtNodes())
 
 await model.close()
 ```
 
+## Example
+
+```bash
+node examples/dht.mjs
+```
+
 ## Modifying the schema
 
-Edit the [Hyperschema](https://github.com/holepunchto/hyperschema) definition at [`build.js`](./build.js), then run:
+Edit the definition in [`builder.js`](./builder.js) ([Hyperschema](https://github.com/holepunchto/hyperschema)), then run:
 
 ```bash
 npm run build
 ```
+
+`./spec/` will get updated and must be committed to the repository.
 
 ## License
 
