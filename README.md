@@ -18,8 +18,9 @@ const rocks = HyperDB.rocks('./my-rocks.db', spec)
 const model = new Model(rocks)
 await model.db.ready()
 
-await model.setDhtNodes([...(await model.getDhtNodes()), { host: 'holepunch.to', port: 8080 }])
-console.log(await model.getDhtNodes())
+await model.setDhtNodes([{ host: 'holepunch.to', port: 8080 }])
+const nodes = await model.getDhtNodes()
+console.log(nodes)
 
 await model.close()
 ```
