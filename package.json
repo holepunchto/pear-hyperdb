@@ -5,11 +5,11 @@
   "author": "Holepunch",
   "main": "index.js",
   "dependencies": {
-    "bare-fs": "^4.5.3",
+    "bare-fs": "^4.5.6",
     "bare-path": "^3.0.0",
     "db-lock": "^1.2.0",
-    "hyperdb": "^5.0.1",
-    "hyperschema": "^1.19.0"
+    "hyperdb": "^6.3.0",
+    "hyperschema": "^1.20.1"
   },
   "imports": {
     "fs": {
