@@ -9,7 +9,7 @@
     "bare-fs": "^4.5.3",
     "bare-path": "^3.0.0",
     "db-lock": "^1.2.0",
-    "hyperdb": "^5.0.1",
+    "hyperdb": "^6.6.3",
     "hyperschema": "^1.19.0",
     "localdrive": "^2.2.0",
     "pear-errors": "^1.0.1",
