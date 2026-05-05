@@ -6,11 +6,7 @@
   "main": "index.js",
   "files": [
     "index.js",
-    "spec/index.js",
-    "spec/db/index.js",
-    "spec/db/messages.js",
-    "spec/helpers.js",
-    "NOTICE"
+    "spec/**"
   ],
   "dependencies": {
     "b4a": "^1.7.3",
