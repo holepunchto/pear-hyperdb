@@ -4,6 +4,10 @@
   "description": "HyperDB model for Pear",
   "author": "Holepunch",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "spec/**"
+  ],
   "dependencies": {
     "b4a": "^1.7.3",
     "bare-fs": "^4.5.3",
